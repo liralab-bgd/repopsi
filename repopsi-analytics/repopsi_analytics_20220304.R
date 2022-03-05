@@ -61,6 +61,8 @@ datebreaks = seq(as.Date("2020-03-01"), as.Date("2022-02-01"), by = "1 months")
 
 # Create the connected scatterplot
 
+png(file="plot-growth_2022.png", width = 3984, height = 2352, res=300) #open PNG
+
 data_records %>%
   ggplot(aes(x=date, y=records), ) +
   geom_line(color="grey") +
@@ -74,6 +76,8 @@ data_records %>%
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()
   )
+
+dev.off() #close PNG
 
 # REPOPSI records by type ------------------------------------------------------
 
@@ -96,8 +100,9 @@ data_type = tribble(
 data_type$availability = factor(data_type$availability, 
                                 levels = c("Elsewhere online", "Upon request", "OA in REPOPSI"))
 
-
 # Create grouped barchart
+
+png(file="plot-type_2022.png", width = 3723, height = 2382, res=300) #open PNG
 
 ggplot(data_type, aes(fill=availability, y=records, x=date)) + 
   geom_bar(position="stack", stat="identity", width=0.65, color = "black") +
@@ -110,3 +115,5 @@ ggplot(data_type, aes(fill=availability, y=records, x=date)) +
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()
   )
+
+dev.off() #close PNG
