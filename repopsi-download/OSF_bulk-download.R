@@ -37,14 +37,14 @@ osf_links = osf_links[!duplicated(osf_links$`Link to instrument in the Repositor
 
 # If you are downloading only a couple of components, you may want to provide them directly in this script. The following code shows one way to do this.  
 
-library(tibble)
-
-osf_links_list = tribble( 
-  ~osf_links,
-  'https://osf.io/5d3yb/',	# put entire OSF links or only GUIDs
-  'https://osf.io/8p4qs/',	
-  'https://osf.io/r3ysk/',  # add more links/GUIDs as needed
-  )
+# library(tibble)
+# 
+# osf_links_list = tribble( 
+#   ~osf_links,
+#   'https://osf.io/5d3yb/',	# put entire OSF links or only GUIDs
+#   'https://osf.io/8p4qs/',	
+#   'https://osf.io/r3ysk/',  # add more links/GUIDs as needed
+#   )
 
 # STEP 2: Create download links -------------------------------------------
 
@@ -73,5 +73,7 @@ osf_links$download = paste(osf_links$string1,osf_links$guid,osf_links$string2, s
 # STEP 3: Download the components -----------------------------------------
 
 # Run this code to download all of the components at once, in your default browser. Components will be downloaded as separate zip files.
-
-lapply(osf_links$download,function(x) browseURL(as.character(x)))
+# If there are more than 200 components, it is advisable to split it, for example:
+# Run this line first, and then run the next one — but not both at the same time.
+lapply(osf_links$download[1:100],function(x) browseURL(as.character(x)))
+lapply(osf_links$download[101:219],function(x) browseURL(as.character(x)))
